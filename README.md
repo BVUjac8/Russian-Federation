@@ -29,5 +29,5 @@ R & R Studio should be downloaded from website, all others should be standardly 
 No collaboration can be made on this project.
 ### FAQs
 ***
-1. **Why is a data analysis of a data set called hawks important to perform?**
-_To understand how to handle various file formats, data wrangling them, connecting them by a single variable, merging them into a single dataset, it is then concluded to store the conjoined data into a database._
+1. **Why is this discriminant analysis of three different file formats of paleoclimatology data based off of 2 lakes in the Russian Federation important to perform?**
+_To understand how to handle various file formats within R programming, data wrangling them, connecting them by a single column variable, merging them into a single dataset, it is then concluded to store the conjoined data into a database._
