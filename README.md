@@ -1,6 +1,6 @@
 # Russian-Federation
 ***
-A discriminant analysis of of three different file formats of paleoclimatology data based off of 2 lakes in the Russian Federation and storing them into a database.
+A discriminant analysis of three different file formats of paleoclimatology data based off of 2 lakes in the Russian Federation and storing them into a database based off a common column variable.
 ## Table of contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
@@ -30,4 +30,4 @@ No collaboration can be made on this project.
 ### FAQs
 ***
 1. **Why is a data analysis of a data set called hawks important to perform?**
-_Determining which species of hawks grew to maturity, migrated south in the month of November, & has a lengthier hallux as well as does the time of capture have anything to do with the maturity of a species of hawks is unique to know which species of hawks reached adulthood, participated in migration, has a lengthier killing talon plus does the maturity of a species of hawks have anything to do with capture rate could protect the three different species of hawks against animal predators or human hunters._
+_To understand how to handle various file formats, data wrangling them, connecting them by a single variable, merging them into a single dataset, it is then concluded to store the conjoined data into a database._
