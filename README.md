@@ -9,7 +9,7 @@ A discriminant analysis of three different file formats of paleoclimatology data
 5. [FAQs](#faqs)
 ### General Info
 ***
-Determining which species of hawks grew to maturity, migrated south in the month of November, & has a lengthier hallux as well as does the time of capture have anything to do with the maturity of a species of hawks.
+3 file formats (txt, JSON, & xls) of paleoclimatology data based off of 2 lakes in the Russian Federation was analyzed to include one common column variable within each, merged into a single dataset, and then stored into a database.
 ### Russia
 ![Russian Flag](https://p7.hiclipart.com/preview/101/99/735/russian-empire-soviet-union-flag-of-russia-clip-art-russia.jpg)
 ### Technologies
