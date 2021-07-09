@@ -1,6 +1,6 @@
 # Russian-Federation
 ***
-A discriminant analysis of a data set called hawks.
+A discriminant analysis of of three different file formats of paleoclimatology data based off of 2 lakes in the Russian Federation and storing them into a database.
 ## Table of contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
