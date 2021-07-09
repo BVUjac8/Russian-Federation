@@ -17,7 +17,7 @@ A discriminant analysis of three different file formats of paleoclimatology data
 * [R](https://www.r-project.org/): Most recent version
 * [R Studio](https://www.rstudio.com/): Most recent version
 * [Microsoft Excel](https://www.microsoft.com/en-us/): Any version
-* [Notepad]: Any version
+* Notepad: Any version
 * [Microsoft PowerPoint](https://www.microsoft.com/en-us/): Any version
 * [Microsoft Word](https://www.microsoft.com/en-us/): Any version
 * [Adobe PDF](https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html): Any version
