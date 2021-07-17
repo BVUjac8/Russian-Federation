@@ -1,0 +1,182 @@
+---
+title: "Project-Russian Federation"
+author: "Julia Cuellar"
+date: '2021-7-25'
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## EDA
+```{r eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
+library(knitr)
+library(latexpdf)
+library(tinytex)
+library(data.table)
+library(tidyverse)
+library(rjson)
+library(readxl)
+library(dplyr)
+library(RSQLite)
+setwd("C:/Users/jcuel/Videos/Bellevue/Summer 2021/Professor Williams/Projects/Project 2")
+baikal_df = fread("Paleoclimatology - Baikal.txt", fill = TRUE)
+lake_df = fromJSON(file = "Paleoclimatology - Lake.json")
+lake2_df = read_excel("Paleoclimatology - Lake2.xls")
+```
+
+**Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+head(baikal_df)
+```
+
+**Summary of Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+summary(baikal_df)
+```
+
+**Display nulls of Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+is.null(baikal_df)
+```
+
+**Display NA's of Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+sum(is.na(baikal_df$Hole))
+sum(is.na(baikal_df$`Core-Sec.-Int.`))
+sum(is.na(baikal_df$Depth))
+sum(is.na(baikal_df$Bio.sil.))
+sum(is.na(baikal_df$Age))
+sum(is.na(baikal_df$V6))
+sum(is.na(baikal_df$V7))
+```
+
+**Rename columns of Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+colnames(baikal_df) = c("Hole", "Core-Sec", "Int", "Depth", "Biosil", "Age", "X")
+colnames(baikal_df)
+```
+
+**Redisplay NA's of X:**
+```{r eval = TRUE, echo = FALSE}
+baikal_df = replace_na(baikal_df, list(`X` = mean(baikal_df$'X', na.rm = TRUE)))
+sum(is.na(baikal_df$X))
+```
+
+**Redisplay Baikal Data:**
+```{r eval = TRUE, echo = FALSE}
+write.csv(baikal_df, "Paleoclimatology - Baikal.csv", row.names = FALSE)
+head(baikal_df)
+```
+
+**Project Age column plot from Baikal data:**
+
+```{r eval = TRUE, echo = FALSE}
+boxplot(baikal_df$Age, main = 'Age of Baikal', xlab = 'age', col = 'bisque1', border = "cornsilk4", horizontal = TRUE, notch = TRUE)
+```
+
+**Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+lake_df = read.delim("Paleoclimatology - Lake.txt", header = TRUE, sep = "\t", dec = ".")
+colnames(lake_df) = c("Age-ka", "MTWM-degC", "MTWM-deg-C", "MTWM-deg+C", "PANN-mm", "PANN--mm", "PANN-+mm", "Trees & Shrubs", "Picea")
+head(lake_df)
+```
+
+**Summary of Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+summary(lake_df)
+```
+
+**Display nulls of Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+is.null(lake_df)
+```
+
+**Display NA's of Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+sum(is.na(lake_df))
+```
+
+**Rename Age-ka column to Age of Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+names(lake_df)[1] = "Age"
+colnames(lake_df)
+```
+
+**Redisplay Lake Data:**
+```{r eval = TRUE, echo = FALSE}
+write.csv(lake_df, "Paleoclimatology - Lake.csv", row.names = FALSE)
+head(lake_df)
+```
+
+**Project Age column plot from Lake data:**
+
+```{r eval = TRUE, echo = FALSE}
+boxplot(lake_df$Age, main = 'Age of Lake', xlab = 'age', col = 'burlywood1')
+```
+
+**Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+head(lake2_df)
+```
+
+**Summary of Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+summary(lake2_df)
+```
+
+**Display nulls of Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+is.null(lake2_df)
+```
+
+**Display NA's of Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+sum(is.na(lake2_df))
+```
+
+**Rename Age-ka-BP column to Age of Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+names(lake2_df)[1] = "Age"
+colnames(lake2_df)
+```
+
+**Change Lake 2 Data into Dataframe:**
+```{r eval = TRUE, echo = FALSE}
+lake2_df = data.frame(lake2_df)
+lake2_df
+```
+
+**Redisplay Lake 2 Data:**
+```{r eval = TRUE, echo = FALSE}
+write.csv(lake2_df, "Paleoclimatology - Lake2.csv", row.names = FALSE)
+head(lake2_df)
+```
+
+**Project Age column plot from Lake 2 data:**
+
+```{r eval = TRUE, echo = FALSE}
+boxplot(lake2_df$Age, main = 'Age of Lake 2', xlab = 'age', col = 'goldenrod1')
+```
+
+## Merge all file formats into a database
+```{r eval = TRUE, echo = FALSE}
+baikal = read.csv("Paleoclimatology - Baikal.csv")
+lake = read.csv("Paleoclimatology - Lake.csv")
+lake2 = read.csv("Paleoclimatology - Lake2.csv")
+db = merge(lake, lake2, by = "Age", all = TRUE)
+db_final = full_join(db, baikal, by = "Age", all = TRUE)
+write.csv(db_final, "Paleoclimatology - Russia.csv", row.names = FALSE)
+dim(db_final)
+```
+
+**Project Age column plot from database data:**
+
+```{r eval = TRUE, echo = FALSE}
+boxplot(db_final$Age, main = "Age of database data", xlab = "age", col = "khaki", border = "ivory4", horizontal = TRUE, notch = TRUE)
+```
